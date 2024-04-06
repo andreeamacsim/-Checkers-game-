@@ -1,0 +1,33 @@
+﻿<Window x:Class="Checkers.Views.StatisticsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Checkers.Views"
+        mc:Ignorable="d"
+        Title="StatisticsWindow" Height="450" Width="800">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        
+        <TextBlock Text="White wins:" VerticalAlignment="Center" FontWeight="Bold"/>
+        <TextBlock Text="{Binding WhiteWins}" Grid.Column="1" VerticalAlignment="Center" TextAlignment="Right"/>
+
+        
+        <TextBlock Text="Red wins:" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold"/>
+        <TextBlock Text="{Binding RedWins}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" TextAlignment="Right"/>
+
+       
+        <TextBlock Text="Max pieces remaining:" Grid.Row="2" VerticalAlignment="Center" FontWeight="Bold"/>
+        <TextBlock Text="{Binding MaxPiecesRemaining}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" TextAlignment="Right"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "He+LU1TIaE3WfqOcUmVQ7i4dbdUbTB6h7tEjIuCzPMPzaoefQfwQBIxt4EETX9ZBeCoQuTVA4f0ZzCA1ZPmU5w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Andreea\\Desktop\\Checkers\\Checkers.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Andreea\\.nuget\\packages\\controlzex\\4.4.0\\controlzex.4.4.0.nupkg.sha512",
+    "C:\\Users\\Andreea\\.nuget\\packages\\mahapps.metro\\2.4.10\\mahapps.metro.2.4.10.nupkg.sha512",
+    "C:\\Users\\Andreea\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.19\\microsoft.xaml.behaviors.wpf.1.1.19.nupkg.sha512",
+    "C:\\Users\\Andreea\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512"
+  ],
+  "logs": []
+}

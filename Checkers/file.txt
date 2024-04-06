@@ -1,0 +1,3 @@
+﻿Red player wins: 1
+White player wins: 0
+Max pieces remaining for a winner: 12

@@ -1,0 +1,2 @@
+Red player wins: 0
+White player wins: 1

@@ -1,0 +1,2 @@
+Red players remaining: 0
+White players remaining: 12

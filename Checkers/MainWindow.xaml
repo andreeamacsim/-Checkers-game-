@@ -1,0 +1,158 @@
+﻿<Window x:Class="Checkers.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Checkers"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:vm="clr-namespace:Checkers.ViewModels"
+        xmlns:conv="clr-namespace:Checkers.ForDesign"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="750" Width="1200">
+
+    <Window.DataContext>
+        <vm:BoardViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <conv:BoolToBrushValueConverter x:Key="BoolToBrushConverter"/>
+        <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <conv:PlayerToTurnConverter x:Key="PlayerToTurnConverter"/>
+        
+
+
+    </Window.Resources>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Menu Grid.Row="0">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New Game" Command="{Binding NewGameCommand}"/>
+                <MenuItem Header="_Save" Command="{Binding SaveGameCommand}"/>
+                <MenuItem Header="_Open" Command="{Binding OpenGameCommand}"/>
+                <MenuItem Header="_Allow Multiple Jump" IsCheckable="True" 
+                  IsChecked="{Binding AllowMultipleJump, Mode=TwoWay}"/>
+                <MenuItem Header="_Statistics" Command="{Binding ShowStatisticsCommand}"/>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_About" Click="AboutMenuItem_Click"/>
+                
+            </MenuItem>
+        </Menu>
+        
+        <ItemsControl
+            ItemsSource="{Binding Cells}" 
+            Background="Gray"
+            Grid.Row="1"
+            Grid.Column="1"
+            BorderThickness="6"
+            BorderBrush="Gray"
+            >
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Rows="8" Columns="8"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Command="{Binding DataContext.ClickCellCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                    CommandParameter="{Binding}">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Border Width="65"
+                                            Height="65"
+                                            Background="{Binding IsBlack, Converter={StaticResource BoolToBrushConverter}}"
+ 
+                                            >
+                                    <ContentControl>
+                                        <ContentControl.Style>
+                                            <Style TargetType="ContentControl">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Content}" Value="RedPawn">
+                                                        <Setter Property="Content">
+                                                            <Setter.Value>
+                                                                <Ellipse Fill="DarkRed"
+                                                                         Width="35"
+                                                                         Height="35"
+                                                                         HorizontalAlignment="Center"
+                                                                         VerticalAlignment="Center"
+                                                                    />
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+
+                                                    <DataTrigger Binding="{Binding Content}" Value="WhitePawn">
+                                                        <Setter Property="Content">
+                                                            <Setter.Value>
+                                                                <Ellipse Fill="White"
+                                                                     Width="35"
+                                                                     Height="35"
+                                                                     HorizontalAlignment="Center"
+                                                                     VerticalAlignment="Center"
+                                                                />
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Content}" Value="WhiteKing">
+                                                        <Setter Property="Content">
+                                                            <Setter.Value>
+                                                                <Canvas Width="100" Height="100" Margin="3 0 0 0">
+                                                                    <Ellipse Fill="White" Width="35" Height="35" Canvas.Left="12.5" Canvas.Top="13"/>
+                                                                    <Polygon Fill="Gold" Points="32.5,20 47.5,20 40,5"/>
+                                                                    <Polygon Fill="Gold" Points="22.5,20 37.5,20 30,5"/>
+                                                                    <Polygon Fill="Gold" Points="12.5,20 27.5,20 20,5"/>
+                                                                    <Polygon Fill="Gold" Points="15,5 20,20 30,20 35,5"/>
+                                                                </Canvas>
+
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Content}" Value="RedKing">
+                                                        <Setter Property="Content">
+                                                            <Setter.Value>
+                                                                <Canvas Width="100" Height="100" Margin="3 0 0 0">
+                                                                    <Ellipse Fill="DarkRed" Width="35" Height="35" Canvas.Left="12.5" Canvas.Top="13"/>
+                                                                    <Polygon Fill="Gold" Points="32.5,20 47.5,20 40,5"/>
+                                                                    <Polygon Fill="Gold" Points="22.5,20 37.5,20 30,5"/>
+                                                                    <Polygon Fill="Gold" Points="12.5,20 27.5,20 20,5"/>
+                                                                    <Polygon Fill="Gold" Points="15,5 20,20 30,20 35,5"/>
+                                                                </Canvas>
+
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+
+
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ContentControl.Style>
+                                    </ContentControl>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Button
+            Content="Make a move"
+            Background="LightGray"
+            Command="{Binding MovePieceCommand}" Grid.Column="2" Margin="35,383,50,32" Grid.Row="1"
+            />
+      
+
+
+    </Grid>
+</Window>
