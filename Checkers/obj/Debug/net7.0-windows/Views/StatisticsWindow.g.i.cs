@@ -53,7 +53,7 @@ namespace Checkers.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Checkers;V1.0.0.0;component/views/statisticswindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Checkers;component/views/statisticswindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\StatisticsWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
